@@ -1,7 +1,7 @@
 # split_comment
 Js dedicated to split Wordpress comment. 
 ###Installation
-To install the comment js, add the following to your theme code.
+To install the comment js, add the following to your theme code in ```functions.php```.
 ```php 
   function reg_scripts()
 {
