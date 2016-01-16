@@ -11,7 +11,7 @@ To install the comment js, add the following to your theme code in ```functions.
   add_action('wp_enqueue_scripts', 'reg_scripts', 100);
 ```
 ### Usage
-You must add code below to your script or edit the code in plugin.
+You must add code below to your script.
 ```javascript
   jQuery(document).ready(function ($) {
     var com = $.comment,
