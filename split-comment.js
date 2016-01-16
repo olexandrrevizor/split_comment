@@ -1,10 +1,4 @@
-jQuery(document).ready(function () {
-    var com = $.comment,
-        showComments = 10,
-        loadComments = 20;
-    com.showComment(showComments,loadComments);
-});
-(function (name, definition) {
+;(function (name, definition) {
     var theModule = definition(),
     // this is considered "safe":
         hasDefine = typeof define === 'function' && define.amd,
