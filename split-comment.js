@@ -14,8 +14,9 @@
     }
 })('comment', function () {
     var module = this;
-    module.respondForm = $('#respond');
-    module.comments = $('.depth-1');
+    module.commentBoxOffset = jQuery('#comments').offset().top - 70;
+    module.respondForm = jQuery('.comment-list');
+    module.comments = jQuery('.depth-1');
     module.numberShows = 10;
     module.stepShow = 5;
     module.numberComments = module.comments.length;
@@ -30,12 +31,18 @@
 
     module.hideComment = function (method) {
         for (var i = module.numberShows; i < module.numberComments; i++) {
-            method != 'toggle' ? jQuery(module.comments[i]).hide() : jQuery(module.comments[i]).toggle('slow');
+            jQuery(module.comments[i]).hide();
+        }
+    }
+
+    module.hideCommentSlow = function () {
+        for (var i = module.numberShows; i < module.numberComments; i++) {
+            jQuery(module.comments[i]).toggle('slow');
         }
     }
 
     module.addShowMoreBtn = function () {
-        jQuery('<button/>').attr('class', 'toggle-comments').attr('href', '#').html('Показать больше').insertBefore(module.respondForm);
+        module.respondForm.append(jQuery('<button/>').attr('class', 'toggle-comments').attr('href', '#').html('Показать больше'));
     }
 
     module.showMore = function (lastShow) {
@@ -47,9 +54,10 @@
     }
 
     module.showComment = function (number, step) {
+
         if( module.numberComments > 10) {
             module.init(number, step);
-            var anchor = $('.toggle-comments');
+            var anchor = jQuery('.toggle-comments');
             var anchorText = anchor.html();
             jQuery('.toggle-comments').on('click', function (e) {
                 e.preventDefault();
@@ -63,10 +71,10 @@
                 else {
                     module.numberShows = number;
                     module.lastShow = module.numberComments - module.numberShows;
-                    module.hideComment('toggle');
+                    module.hideCommentSlow();
                     anchor.text('Показать больше');
+                    jQuery("html, body").animate({scrollTop: module.commentBoxOffset}, "slow");
                 }
-                console.log(module.lastShow);
             });
         }
         else {
@@ -75,8 +83,7 @@
     }
 
     return {
-        init: module.init,
         showComment: module.showComment
-    };
+    }
 
-});
+})
